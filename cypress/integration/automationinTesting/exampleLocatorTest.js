@@ -14,6 +14,10 @@ context('Проверка элементов на странице', function ()
 
 
     //добавить тест на посещение страницы
+    it('visitURL', () => {
+        cy.visit('/')
+
+    })
 
 
     //Тестовый пример для демонстрации определения локаторов различными способами
@@ -33,7 +37,7 @@ context('Проверка элементов на странице', function ()
         cy.get('.contact')
 
         //Индексы: позволяют выбирать элементы на странице по их порядковому номеру
-        cy.get('button[type="button"]').eq(2)
+        cy.get('button[type="button"]').eq(1)
 
     })
 
@@ -42,17 +46,32 @@ context('Проверка элементов на странице', function ()
     it('getLocatorMessageForm', () => {
 
         //определить вместе локаторы для полей Email, Phone, Subject, Message
+        cy.get('[data-testid="ContactEmail"]')
+        cy.get('[data-testid="ContactPhone"]')
+        cy.get('[data-testid="ContactSubject"]')
+        cy.get('[data-testid="ContactDescription"]')
+
         //определить локатор кнопки Submit
+        cy.get('#submitContact')
 
     })
 
 
     //Найти локаторы кнопок "Book this room" и "Submit"
     it('getLocatorButton', () => {
+        cy.get('.col-sm-7 > .btn')
+        cy.get('button[type="button"]').eq(1)
+        cy.get('button[class="btn btn-outline-primary float-right openBooking"]')
+        cy.contains('Book this room')
+
+        cy.get('#submitContact')
+        cy.get('button[type="button"]').eq(2)
+        cy.get('button[class="btn btn-outline-primary float-right"]')
+        cy.contains('Submit')
 
     })
 
-    //определеим элемент в контактах, где указан номер телефона
+    //определим элемент в контактах, где указан номер телефона
     it('getLocatorContact', () => {
         cy.get('.contact > :nth-child(3) > :nth-child(3)')//хороший пример локатора или нет? Почему?
         cy.contains('012345678901')//хороший пример локатора или нет? Почему?
